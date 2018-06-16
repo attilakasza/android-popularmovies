@@ -9,6 +9,7 @@ import android.widget.ImageView;
 
 import com.attilakasza.popularmovies.R;
 import com.attilakasza.popularmovies.models.Movie;
+import com.squareup.picasso.Picasso;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.PosterViewHolder>{
 
@@ -29,7 +30,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.PosterViewHo
     }
 
     @Override
-    public PosterViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType){
+    public PosterViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
         View view = inflater.inflate(R.layout.poster_list_item, viewGroup, false);
         return new PosterViewHolder(view);
@@ -37,7 +38,12 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.PosterViewHo
 
     @Override
     public void onBindViewHolder(PosterViewHolder holder, int position) {
-
+        Picasso.with(mContext)
+                .load(POSTER_URL.concat(mMovie[position].getmPoster()))
+                .fit()
+                .placeholder(R.drawable.progress_animation)
+                .error(R.drawable.ic_error)
+                .into(holder.ivPosterItem);
     }
 
     @Override
