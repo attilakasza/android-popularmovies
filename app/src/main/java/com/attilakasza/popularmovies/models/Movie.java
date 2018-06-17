@@ -1,6 +1,9 @@
 package com.attilakasza.popularmovies.models;
 
-public class Movie {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Movie implements Parcelable {
 
     private String mTitle;
     private String mDate;
@@ -58,4 +61,37 @@ public class Movie {
         this.mPlotSynopsis = mPlotSynopsis;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.mTitle);
+        dest.writeString(this.mDate);
+        dest.writeString(this.mPoster);
+        dest.writeString(this.mVote);
+        dest.writeString(this.mPlotSynopsis);
+    }
+
+    protected Movie(Parcel in) {
+        this.mTitle = in.readString();
+        this.mDate = in.readString();
+        this.mPoster = in.readString();
+        this.mVote = in.readString();
+        this.mPlotSynopsis = in.readString();
+    }
+
+    public static final Parcelable.Creator<Movie> CREATOR = new Parcelable.Creator<Movie>() {
+        @Override
+        public Movie createFromParcel(Parcel source) {
+            return new Movie(source);
+        }
+
+        @Override
+        public Movie[] newArray(int size) {
+            return new Movie[size];
+        }
+    };
 }

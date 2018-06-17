@@ -8,7 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.attilakasza.popularmovies.models.Movie;
+
 public class MovieFragment extends Fragment {
+
+    private Movie mMovie;
+    private static final String MOVIE = "MOVIE";
 
     public MovieFragment() {}
 
@@ -18,7 +23,11 @@ public class MovieFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_movie, container, false);
 
-        return rootView;
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            mMovie = bundle.getParcelable(MOVIE);
+        }
 
+        return rootView;
     }
 }
