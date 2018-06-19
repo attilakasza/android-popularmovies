@@ -1,12 +1,16 @@
 package com.attilakasza.popularmovies;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
 
     private PosterFragment mPosterFragment;
     private static final String FRAGMENT_NAME = "POSTERFRAGMENT";
+    private String mMovieType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,5 +37,24 @@ public class MainActivity extends AppCompatActivity {
                 getSupportFragmentManager().putFragment(outState, FRAGMENT_NAME, mPosterFragment);
             }
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.popular) {
+            mMovieType = "popular";
+        }
+        if (id == R.id.top_rated) {
+            mMovieType = "top_rated";
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
