@@ -1,4 +1,4 @@
-package com.attilakasza.popularmovies;
+package com.attilakasza.popularmovies.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.attilakasza.popularmovies.R;
 import com.attilakasza.popularmovies.models.Movie;
 
 public class MovieFragment extends Fragment {

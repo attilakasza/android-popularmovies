@@ -1,9 +1,12 @@
-package com.attilakasza.popularmovies;
+package com.attilakasza.popularmovies.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+
+import com.attilakasza.popularmovies.R;
+import com.attilakasza.popularmovies.fragments.MovieFragment;
 
 public class MovieActivity extends AppCompatActivity {
 
