@@ -6,11 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 import com.attilakasza.popularmovies.R;
-import com.attilakasza.popularmovies.fragments.MovieFragment;
 
 public class MovieActivity extends AppCompatActivity {
-
-    MovieFragment mMovieFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,13 +19,6 @@ public class MovieActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-
-        mMovieFragment = new MovieFragment();
-        android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .add(R.id.movie_container, mMovieFragment)
-                .addToBackStack(null)
-                .commit();
     }
 
     @Override
