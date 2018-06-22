@@ -8,14 +8,16 @@ public class Movie implements Parcelable {
     private String mTitle;
     private String mDate;
     private String mPoster;
+    private String mBackdrop;
     private String mVote;
     private String mPlotSynopsis;
 
 
-    public Movie(String title, String date, String poster, String vote, String plot) {
+    public Movie(String title, String date, String poster, String backdrop, String vote, String plot) {
         mTitle = title;
         mDate = date;
         mPoster = poster;
+        mBackdrop = backdrop;
         mVote = vote;
         mPlotSynopsis = plot;
     }
@@ -45,6 +47,14 @@ public class Movie implements Parcelable {
         this.mPoster = mPoster;
     }
 
+    public String getmBackdrop() {
+        return mBackdrop;
+    }
+
+    public void setmBackdrop(String mBackdrop) {
+        this.mBackdrop = mBackdrop;
+    }
+
     public String getmVote() {
         return mVote;
     }
@@ -71,6 +81,7 @@ public class Movie implements Parcelable {
         dest.writeString(this.mTitle);
         dest.writeString(this.mDate);
         dest.writeString(this.mPoster);
+        dest.writeString(this.mBackdrop);
         dest.writeString(this.mVote);
         dest.writeString(this.mPlotSynopsis);
     }
@@ -79,11 +90,12 @@ public class Movie implements Parcelable {
         this.mTitle = in.readString();
         this.mDate = in.readString();
         this.mPoster = in.readString();
+        this.mBackdrop = in.readString();
         this.mVote = in.readString();
         this.mPlotSynopsis = in.readString();
     }
 
-    public static final Parcelable.Creator<Movie> CREATOR = new Parcelable.Creator<Movie>() {
+    public static final Creator<Movie> CREATOR = new Creator<Movie>() {
         @Override
         public Movie createFromParcel(Parcel source) {
             return new Movie(source);

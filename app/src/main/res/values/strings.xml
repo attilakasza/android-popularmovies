@@ -3,6 +3,8 @@
 
     <!-- Content descriptions-->
     <string name="movie_poster_content_description">Movie Poster</string>
+    <string name="movie_backdrop_content_description">Movie Backdrop</string>
+
 
     <!-- Menu items-->
     <string name="order_menu_item">Order</string>

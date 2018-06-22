@@ -22,6 +22,7 @@ public class FavoriteDbHelper extends SQLiteOpenHelper {
                 FavoriteContract.FavoriteEntry.COLUMN_TITLE + " TEXT NOT NULL, " +
                 FavoriteContract.FavoriteEntry.COLUMN_DATE + " TEXT NOT NULL, " +
                 FavoriteContract.FavoriteEntry.COLUMN_POSTER + " TEXT NOT NULL, " +
+                FavoriteContract.FavoriteEntry.COLUMN_BACKDROP + " TEXT NOT NULL, " +
                 FavoriteContract.FavoriteEntry.COLUMN_VOTE + " TEXT NOT NULL, " +
                 FavoriteContract.FavoriteEntry.COLUMN_PLOT + " TEXT NOT NULL, " +
                 FavoriteContract.FavoriteEntry.COLUMN_FAVORITE + " TEXT NOT NULL " + ");";

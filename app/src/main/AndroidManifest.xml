@@ -22,7 +22,7 @@
         <activity
             android:name=".activities.MovieActivity"
             android:parentActivityName=".activities.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/Toolbar">
         <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.attilakasza.popularmovies.activities.MainActivity" />

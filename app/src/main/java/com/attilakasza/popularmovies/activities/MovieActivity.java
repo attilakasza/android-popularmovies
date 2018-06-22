@@ -21,9 +21,12 @@ public class MovieActivity extends AppCompatActivity {
     private Movie mMovie;
     private static final String MOVIE = "MOVIE";
     private static final String POSTER_URL = "http://image.tmdb.org/t/p/w185";
+    private static final String BACKDROP_URL = "http://image.tmdb.org/t/p/w780";
+
 
     @BindView(R.id.tv_date) TextView textDate;
     @BindView(R.id.iv_poster) ImageView imagePoster;
+    @BindView(R.id.iv_backdrop) ImageView imageBackdrop;
     @BindView(R.id.tv_vote) TextView textVote ;
     @BindView(R.id.tv_plot) TextView textPlot ;
     @BindView(R.id.detail_toolbar) Toolbar toolbar;
@@ -54,6 +57,9 @@ public class MovieActivity extends AppCompatActivity {
         Picasso.with(this)
                 .load(POSTER_URL.concat(mMovie.getmPoster()))
                 .into(imagePoster);
+        Picasso.with(this)
+                .load(BACKDROP_URL.concat(mMovie.getmBackdrop()))
+                .into(imageBackdrop);
     }
 
     @Override

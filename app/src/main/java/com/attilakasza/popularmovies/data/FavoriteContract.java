@@ -18,6 +18,7 @@ public class FavoriteContract {
         public static final String COLUMN_TITLE = "title";
         public static final String COLUMN_DATE = "date";
         public static final String COLUMN_POSTER = "poster";
+        public static final String COLUMN_BACKDROP = "backdrop";
         public static final String COLUMN_VOTE = "vote";
         public static final String COLUMN_PLOT = "plot";
         public static final String COLUMN_FAVORITE = "favorite";
