@@ -1,9 +1,16 @@
 package com.attilakasza.popularmovies.activities;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.AsyncTaskLoader;
+import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,7 +20,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.attilakasza.popularmovies.R;
+import com.attilakasza.popularmovies.adapters.FavoriteAdapter;
 import com.attilakasza.popularmovies.adapters.MovieAdapter;
+import com.attilakasza.popularmovies.data.FavoriteContract;
 import com.attilakasza.popularmovies.fragments.MovieFragment;
 import com.attilakasza.popularmovies.models.Movie;
 import com.attilakasza.popularmovies.utilities.JsonUtils;
@@ -21,14 +30,16 @@ import com.attilakasza.popularmovies.utilities.NetworkUtils;
 
 import java.net.URL;
 
-public class MainActivity extends AppCompatActivity implements MovieAdapter.OnItemClickListener {
+public class MainActivity extends AppCompatActivity implements MovieAdapter.OnItemClickListener, LoaderManager.LoaderCallbacks<Cursor>, FavoriteAdapter.OnItemClickListener {
 
+    private static final String MOVIE = "MOVIE";
+    private static final String MOVIE_QUERY = "MOVIE_QUERY";
+    private static final int FAVORITE_LOADER_ID = 9;
     private Movie[] mMovie;
     private RecyclerView mMovieRecycler;
     private String mMovieType;
     private boolean mTwoPane;
-    private static final String MOVIE = "MOVIE";
-    private static final String MOVIE_QUERY = "MOVIE_QUERY";
+    private FavoriteAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,14 +59,26 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.OnIt
         mMovieRecycler.setHasFixedSize(true);
         mMovieRecycler.setLayoutManager(layoutManager);
 
-        if (savedInstanceState != null) {
-            if (savedInstanceState.containsKey(MOVIE_QUERY)) {
-                mMovieType = savedInstanceState.getString(MOVIE_QUERY);
+        mAdapter = new FavoriteAdapter(MainActivity.this, MainActivity.this);
+
+        if (savedInstanceState != null && savedInstanceState.containsKey(MOVIE_QUERY)) {
+            mMovieType = savedInstanceState.getString(MOVIE_QUERY);
+            if (mMovieType.equals("favorite")) {
+                mMovieRecycler.setAdapter(mAdapter);
+                getSupportLoaderManager().initLoader(FAVORITE_LOADER_ID, null, this);
+            } else {
+                new MovieQueryTask().execute(mMovieType);
             }
         } else {
             mMovieType = "popular";
+            new MovieQueryTask().execute(mMovieType);
         }
-        new MovieQueryTask().execute(mMovieType);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getSupportLoaderManager().restartLoader(FAVORITE_LOADER_ID, null, this);
     }
 
     @Override
@@ -83,6 +106,12 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.OnIt
             mMovieType = "top_rated";
             new MovieQueryTask().execute(mMovieType);
         }
+        if (id == R.id.favorite) {
+            mMovieType = "favorite";
+            mAdapter = new FavoriteAdapter(MainActivity.this, MainActivity.this);
+            mMovieRecycler.setAdapter(mAdapter);
+            getSupportLoaderManager().restartLoader(FAVORITE_LOADER_ID, null, this);
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -101,6 +130,60 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.OnIt
             intent.putExtra(MOVIE, mMovie[position]);
             startActivity(intent);
         }
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    @NonNull
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle args) {
+        return new AsyncTaskLoader<Cursor>(this) {
+
+            Cursor mTaskData = null;
+
+            @Override
+            protected void onStartLoading() {
+                if (mTaskData != null) {
+                    deliverResult(mTaskData);
+                } else {
+                    forceLoad();
+                }
+            }
+
+            @Override
+            public Cursor loadInBackground() {
+                try {
+                    return getContentResolver().query(FavoriteContract.FavoriteEntry.CONTENT_URI,
+                            null,
+                            null,
+                            null,
+                            null);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return null;
+                }
+            }
+
+            public void deliverResult(Cursor data) {
+                mTaskData = data;
+                super.deliverResult(data);
+            }
+        };
+    }
+
+    @Override
+    public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor data) {
+        mAdapter.swapCursor(data);
+    }
+
+    @Override
+    public void onLoaderReset(@NonNull Loader<Cursor> loader) {
+        mAdapter.swapCursor(null);
+    }
+
+    @Override
+    public void onClick(Movie movie) {
+
     }
 
     private class MovieQueryTask extends AsyncTask<String, Void, Movie[]> {

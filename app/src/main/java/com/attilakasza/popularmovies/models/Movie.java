@@ -5,21 +5,25 @@ import android.os.Parcelable;
 
 public class Movie implements Parcelable {
 
+    private String mId;
     private String mTitle;
     private String mDate;
     private String mPoster;
     private String mBackdrop;
     private String mVote;
     private String mPlotSynopsis;
+    private boolean mFavorite;
 
 
-    public Movie(String title, String date, String poster, String backdrop, String vote, String plot) {
+    public Movie(String id, String title, String date, String poster, String backdrop, String vote, String plot, boolean favorite) {
+        mId = id;
         mTitle = title;
         mDate = date;
         mPoster = poster;
         mBackdrop = backdrop;
         mVote = vote;
         mPlotSynopsis = plot;
+        mFavorite = favorite;
     }
 
 
@@ -71,6 +75,14 @@ public class Movie implements Parcelable {
         this.mPlotSynopsis = mPlotSynopsis;
     }
 
+    public boolean ismFavorite() {
+        return mFavorite;
+    }
+
+    public void setmFavorite(boolean mFavorite) {
+        this.mFavorite = mFavorite;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -78,21 +90,25 @@ public class Movie implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.mId);
         dest.writeString(this.mTitle);
         dest.writeString(this.mDate);
         dest.writeString(this.mPoster);
         dest.writeString(this.mBackdrop);
         dest.writeString(this.mVote);
         dest.writeString(this.mPlotSynopsis);
+        dest.writeByte(this.mFavorite ? (byte) 1 : (byte) 0);
     }
 
     protected Movie(Parcel in) {
+        this.mId = in.readString();
         this.mTitle = in.readString();
         this.mDate = in.readString();
         this.mPoster = in.readString();
         this.mBackdrop = in.readString();
         this.mVote = in.readString();
         this.mPlotSynopsis = in.readString();
+        this.mFavorite = in.readByte() != 0;
     }
 
     public static final Creator<Movie> CREATOR = new Creator<Movie>() {
