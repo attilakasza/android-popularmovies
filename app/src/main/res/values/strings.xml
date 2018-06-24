@@ -12,4 +12,6 @@
     <string name="top_rated_menu_item">Top rated</string>
     <string name="favorite_menu_item">Favorites</string>
 
+    <string name="saved">saved</string>
+
 </resources>

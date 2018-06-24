@@ -37,6 +37,14 @@ public class Movie implements Parcelable {
     }
 
 
+    public String getmId() {
+        return mId;
+    }
+
+    public void setmId(String mId) {
+        this.mId = mId;
+    }
+
     public String getmTitle() {
         return mTitle;
     }

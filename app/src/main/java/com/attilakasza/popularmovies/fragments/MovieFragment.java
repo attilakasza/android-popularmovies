@@ -1,5 +1,8 @@
 package com.attilakasza.popularmovies.fragments;
 
+import android.content.ContentValues;
+import android.graphics.PorterDuff;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -9,8 +12,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.attilakasza.popularmovies.R;
+import com.attilakasza.popularmovies.data.FavoriteContract;
 import com.attilakasza.popularmovies.models.Movie;
 import com.squareup.picasso.Picasso;
 
@@ -51,5 +56,25 @@ public class MovieFragment extends Fragment {
                 .into(imagePoster);
 
         return rootView;
+    }
+
+    private void insertFavorite() {
+        ContentValues movieValues = new ContentValues();
+        movieValues.put(FavoriteContract.FavoriteEntry.COLUMN_ID, mMovie.getmId());
+        movieValues.put(FavoriteContract.FavoriteEntry.COLUMN_TITLE, mMovie.getmTitle());
+        movieValues.put(FavoriteContract.FavoriteEntry.COLUMN_DATE, mMovie.getmDate());
+        movieValues.put(FavoriteContract.FavoriteEntry.COLUMN_POSTER, mMovie.getmPoster());
+        movieValues.put(FavoriteContract.FavoriteEntry.COLUMN_BACKDROP, mMovie.getmBackdrop());
+        movieValues.put(FavoriteContract.FavoriteEntry.COLUMN_VOTE, mMovie.getmVote());
+        movieValues.put(FavoriteContract.FavoriteEntry.COLUMN_PLOT, mMovie.getmPlotSynopsis());
+        movieValues.put(FavoriteContract.FavoriteEntry.COLUMN_FAVORITE, true);
+
+        Uri uri = getActivity().getContentResolver().insert(FavoriteContract.FavoriteEntry.CONTENT_URI, movieValues);
+        if(uri != null) {
+            Toast toast = Toast.makeText(getContext(), mMovie.getmTitle() + " " + getString(R.string.saved), Toast.LENGTH_LONG);
+            View view = toast.getView();
+            view.getBackground().setColorFilter(getResources().getColor(R.color.colorAccent), PorterDuff.Mode.SRC_IN);
+            toast.show();
+        }
     }
 }
