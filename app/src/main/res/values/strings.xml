@@ -13,5 +13,6 @@
     <string name="favorite_menu_item">Favorites</string>
 
     <string name="saved">saved</string>
+    <string name="removed">removed</string>
 
 </resources>

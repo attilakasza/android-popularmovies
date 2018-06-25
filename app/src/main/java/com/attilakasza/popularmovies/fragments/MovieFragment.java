@@ -71,10 +71,22 @@ public class MovieFragment extends Fragment {
 
         Uri uri = getActivity().getContentResolver().insert(FavoriteContract.FavoriteEntry.CONTENT_URI, movieValues);
         if(uri != null) {
-            Toast toast = Toast.makeText(getContext(), mMovie.getmTitle() + " " + getString(R.string.saved), Toast.LENGTH_LONG);
-            View view = toast.getView();
-            view.getBackground().setColorFilter(getResources().getColor(R.color.colorAccent), PorterDuff.Mode.SRC_IN);
-            toast.show();
+            showMessage(R.string.saved);
         }
+    }
+
+    private void deleteFavorite() {
+        Uri uri = FavoriteContract.FavoriteEntry.CONTENT_URI.buildUpon().appendPath(mMovie.getmId()).build();
+        int favoriteDeleted = getActivity().getContentResolver().delete(uri, null, null);
+        if (favoriteDeleted != 0) {
+            showMessage(R.string.removed);
+        }
+    }
+
+    private void showMessage(int action){
+        Toast toast = Toast.makeText(getContext(), mMovie.getmTitle() + " " + getString(action) , Toast.LENGTH_LONG);
+        View view = toast.getView();
+        view.getBackground().setColorFilter(getResources().getColor(R.color.colorAccent), PorterDuff.Mode.SRC_IN);
+        toast.show();
     }
 }
