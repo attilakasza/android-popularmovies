@@ -1,6 +1,7 @@
 package com.attilakasza.popularmovies.fragments;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
@@ -56,6 +57,24 @@ public class MovieFragment extends Fragment {
                 .into(imagePoster);
 
         return rootView;
+    }
+
+    private boolean isFavorite(String movieId) {
+        Cursor savedFavorite;
+        savedFavorite = getActivity().getContentResolver().query(
+                FavoriteContract.FavoriteEntry.CONTENT_URI,
+                null,
+                FavoriteContract.FavoriteEntry.COLUMN_ID + "=" + movieId,
+                null,
+                null);
+
+        if (savedFavorite.moveToNext()) {
+            savedFavorite.close();
+            return true;
+        } else {
+            savedFavorite.close();
+            return false;
+        }
     }
 
     private void insertFavorite() {
