@@ -6,6 +6,7 @@ import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -67,6 +68,27 @@ public class MovieActivity extends AppCompatActivity {
         Picasso.with(this)
                 .load(BACKDROP_URL.concat(mMovie.getmBackdrop()))
                 .into(imageBackdrop);
+
+        final FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (fab.getDrawable().getConstantState().equals(getResources().getDrawable(R.drawable.ic_favorite_border).getConstantState())) {
+                    insertFavorite();
+                    fab.setImageResource(R.drawable.ic_favorite);
+                } else if (fab.getDrawable().getConstantState().equals(getResources().getDrawable(R.drawable.ic_favorite).getConstantState())) {
+                    deleteFavorite();
+                    fab.setImageResource(R.drawable.ic_favorite_border);
+                }
+            }
+        });
+
+        if (isFavorite(mMovie.getmId())) {
+            fab.setImageResource(R.drawable.ic_favorite);
+        }
+        if (!isFavorite(mMovie.getmId())) {
+            fab.setImageResource(R.drawable.ic_favorite_border);
+        }
     }
 
     @Override

@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,8 @@ import com.attilakasza.popularmovies.R;
 import com.attilakasza.popularmovies.data.FavoriteContract;
 import com.attilakasza.popularmovies.models.Movie;
 import com.squareup.picasso.Picasso;
+
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -56,6 +59,27 @@ public class MovieFragment extends Fragment {
                 .load(POSTER_URL.concat(mMovie.getmPoster()))
                 .into(imagePoster);
 
+        final FloatingActionButton fab = rootView.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (fab.getDrawable().getConstantState().equals(getResources().getDrawable(R.drawable.ic_favorite_border).getConstantState())) {
+                    insertFavorite();
+                    fab.setImageResource(R.drawable.ic_favorite);
+                } else if (fab.getDrawable().getConstantState().equals(getResources().getDrawable(R.drawable.ic_favorite).getConstantState())) {
+                    deleteFavorite();
+                    fab.setImageResource(R.drawable.ic_favorite_border);
+                }
+            }
+        });
+
+        if (isFavorite(mMovie.getmId())) {
+            fab.setImageResource(R.drawable.ic_favorite);
+        }
+        if (!isFavorite(mMovie.getmId())) {
+            fab.setImageResource(R.drawable.ic_favorite_border);
+        }
+
         return rootView;
     }
 
@@ -88,7 +112,7 @@ public class MovieFragment extends Fragment {
         movieValues.put(FavoriteContract.FavoriteEntry.COLUMN_PLOT, mMovie.getmPlotSynopsis());
         movieValues.put(FavoriteContract.FavoriteEntry.COLUMN_FAVORITE, true);
 
-        Uri uri = getActivity().getContentResolver().insert(FavoriteContract.FavoriteEntry.CONTENT_URI, movieValues);
+        Uri uri = Objects.requireNonNull(getActivity()).getContentResolver().insert(FavoriteContract.FavoriteEntry.CONTENT_URI, movieValues);
         if(uri != null) {
             showMessage(R.string.saved);
         }
