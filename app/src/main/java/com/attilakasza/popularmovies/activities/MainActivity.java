@@ -183,7 +183,19 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.OnIt
 
     @Override
     public void onClick(Movie movie) {
-
+        if (mTwoPane) {
+            Bundle arguments = new Bundle();
+            arguments.putParcelable(MOVIE, movie);
+            Fragment fragment = new MovieFragment();
+            fragment.setArguments(arguments);
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.movie_container, fragment)
+                    .commit();
+        } else {
+            Intent intent = new Intent(getApplicationContext(), MovieActivity.class);
+            intent.putExtra(MOVIE, movie);
+            startActivity(intent);
+        }
     }
 
     private class MovieQueryTask extends AsyncTask<String, Void, Movie[]> {
