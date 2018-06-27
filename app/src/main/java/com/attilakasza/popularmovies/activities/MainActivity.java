@@ -60,8 +60,6 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.OnIt
             mTwoPane = true;
         }
 
-        checkConnection();
-
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 2);
         mMovieRecycler = findViewById(R.id.rv_poster);
         mMovieRecycler.setHasFixedSize(true);
@@ -69,17 +67,19 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.OnIt
 
         mAdapter = new FavoriteAdapter(MainActivity.this, MainActivity.this);
 
-        if (savedInstanceState != null && savedInstanceState.containsKey(MOVIE_QUERY)) {
-            mMovieType = savedInstanceState.getString(MOVIE_QUERY);
-            if (mMovieType.equals("favorite")) {
-                mMovieRecycler.setAdapter(mAdapter);
-                getSupportLoaderManager().initLoader(FAVORITE_LOADER_ID, null, this);
+        if (checkConnection()) {
+            if (savedInstanceState != null && savedInstanceState.containsKey(MOVIE_QUERY)) {
+                mMovieType = savedInstanceState.getString(MOVIE_QUERY);
+                if (mMovieType.equals("favorite")) {
+                    mMovieRecycler.setAdapter(mAdapter);
+                    getSupportLoaderManager().initLoader(FAVORITE_LOADER_ID, null, this);
+                } else {
+                    new MovieQueryTask().execute(mMovieType);
+                }
             } else {
+                mMovieType = "popular";
                 new MovieQueryTask().execute(mMovieType);
             }
-        } else {
-            mMovieType = "popular";
-            new MovieQueryTask().execute(mMovieType);
         }
     }
 
@@ -109,13 +109,15 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.OnIt
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.popular) {
-            mMovieType = "popular";
-            new MovieQueryTask().execute(mMovieType);
-        }
-        if (id == R.id.top_rated) {
-            mMovieType = "top_rated";
-            new MovieQueryTask().execute(mMovieType);
+        if (checkConnection()) {
+            if (id == R.id.popular) {
+                mMovieType = "popular";
+                new MovieQueryTask().execute(mMovieType);
+            }
+            if (id == R.id.top_rated) {
+                mMovieType = "top_rated";
+                new MovieQueryTask().execute(mMovieType);
+            }
         }
         if (id == R.id.favorite) {
             mMovieType = "favorite";
@@ -210,9 +212,10 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.OnIt
     }
 
     // Method to manually check connection status
-    private void checkConnection() {
+    private boolean checkConnection() {
         boolean isConnected = ConnectivityReceiver.isConnected();
         showSnack(isConnected);
+        return  isConnected;
     }
 
     // Showing the status in Snackbar
