@@ -3,10 +3,12 @@ package com.attilakasza.popularmovies.activities;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.AsyncTaskLoader;
@@ -18,19 +20,23 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
+import com.attilakasza.popularmovies.PopularMovies;
 import com.attilakasza.popularmovies.R;
 import com.attilakasza.popularmovies.adapters.FavoriteAdapter;
 import com.attilakasza.popularmovies.adapters.MovieAdapter;
 import com.attilakasza.popularmovies.data.FavoriteContract;
 import com.attilakasza.popularmovies.fragments.MovieFragment;
 import com.attilakasza.popularmovies.models.Movie;
+import com.attilakasza.popularmovies.utilities.ConnectivityReceiver;
 import com.attilakasza.popularmovies.utilities.JsonUtils;
 import com.attilakasza.popularmovies.utilities.NetworkUtils;
 
 import java.net.URL;
 
-public class MainActivity extends AppCompatActivity implements MovieAdapter.OnItemClickListener, LoaderManager.LoaderCallbacks<Cursor>, FavoriteAdapter.OnItemClickListener {
+public class MainActivity extends AppCompatActivity implements MovieAdapter.OnItemClickListener, LoaderManager.LoaderCallbacks<Cursor>, FavoriteAdapter.OnItemClickListener,ConnectivityReceiver.ConnectivityReceiverListener {
 
     private static final String MOVIE = "MOVIE";
     private static final String MOVIE_QUERY = "MOVIE_QUERY";
@@ -53,6 +59,8 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.OnIt
         if (findViewById(R.id.movie_container) != null) {
             mTwoPane = true;
         }
+
+        checkConnection();
 
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 2);
         mMovieRecycler = findViewById(R.id.rv_poster);
@@ -79,6 +87,9 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.OnIt
     protected void onResume() {
         super.onResume();
         getSupportLoaderManager().restartLoader(FAVORITE_LOADER_ID, null, this);
+
+        // register connection status listener
+        PopularMovies.getInstance().setConnectivityListener(this);
     }
 
     @Override
@@ -196,6 +207,34 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.OnIt
             intent.putExtra(MOVIE, movie);
             startActivity(intent);
         }
+    }
+
+    // Method to manually check connection status
+    private void checkConnection() {
+        boolean isConnected = ConnectivityReceiver.isConnected();
+        showSnack(isConnected);
+    }
+
+    // Showing the status in Snackbar
+    private void showSnack(boolean isConnected) {
+        if (!isConnected) {
+            Snackbar snackbar = Snackbar
+                    .make(findViewById(R.id.poster_container), "Sorry! Not connected to internet", Snackbar.LENGTH_LONG);
+
+            View sbView = snackbar.getView();
+            TextView textView = sbView.findViewById(android.support.design.R.id.snackbar_text);
+            textView.setTextColor(Color.RED);
+            snackbar.show();
+        }
+    }
+
+    /**
+     * Callback will be triggered when there is change in
+     * network connection
+     */
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        showSnack(isConnected);
     }
 
     private class MovieQueryTask extends AsyncTask<String, Void, Movie[]> {
