@@ -15,4 +15,8 @@
     <string name="saved">saved</string>
     <string name="removed">removed</string>
 
+    <!-- Tab titles-->
+    <string name="overview">Overview</string>
+    <string name="trailer">Trailer</string>
+    <string name="review">Review</string>
 </resources>
