@@ -17,6 +17,8 @@ public class NetworkUtils {
     private final static String API = "api_key";
     private final static String API_KEY = BuildConfig.MOVIE_DB_API_KEY;
     final static String REVIEWS = "/reviews";
+    final static String VIDEOS = "/videos";
+
 
     public static URL buildUrl(String movieType) {
 
@@ -39,6 +41,23 @@ public class NetworkUtils {
     public static URL buildReviewUrl(String movieId) {
 
         Uri builtUri = Uri.parse(BASE_URL.concat(movieId).concat(REVIEWS))
+                .buildUpon()
+                .appendQueryParameter(API, API_KEY)
+                .build();
+
+        URL url = null;
+        try {
+            url = new URL(builtUri.toString());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+        return url;
+    }
+
+    public static URL buildTrailerUrl(String movieId) {
+
+        Uri builtUri = Uri.parse(BASE_URL.concat(movieId).concat(VIDEOS))
                 .buildUpon()
                 .appendQueryParameter(API, API_KEY)
                 .build();

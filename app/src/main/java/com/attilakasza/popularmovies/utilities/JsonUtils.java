@@ -2,6 +2,7 @@ package com.attilakasza.popularmovies.utilities;
 
 import com.attilakasza.popularmovies.models.Movie;
 import com.attilakasza.popularmovies.models.Review;
+import com.attilakasza.popularmovies.models.Trailer;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -50,6 +51,30 @@ public class JsonUtils {
                 JSONObject reviewJSON = arrayResult.getJSONObject(i);
                 Review review = gson.fromJson(reviewJSON.toString(), Review.class);
                 result[i] = review;
+            }
+
+            return result;
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static Trailer[] parseTrailerJson(String json) {
+
+        try {
+            JSONObject root = new JSONObject(json);
+            Gson gson = new Gson();
+            JSONArray arrayResult = root.getJSONArray(RESULTS);
+
+            Trailer[] result = new Trailer[arrayResult.length()];
+
+            for (int i = 0; i < arrayResult.length(); i++) {
+
+                JSONObject reviewJSON = arrayResult.getJSONObject(i);
+                Trailer trailer = gson.fromJson(reviewJSON.toString(), Trailer.class);
+                result[i] = trailer;
             }
 
             return result;
