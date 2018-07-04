@@ -7,16 +7,19 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.attilakasza.popularmovies.R;
+import com.attilakasza.popularmovies.adapters.FragmentPagerAdapter;
 import com.attilakasza.popularmovies.data.FavoriteContract;
 import com.attilakasza.popularmovies.models.Movie;
 import com.squareup.picasso.Picasso;
@@ -30,13 +33,13 @@ public class MovieFragment extends Fragment {
 
     private Movie mMovie;
     private static final String MOVIE = "MOVIE";
-    private static final String POSTER_URL = "http://image.tmdb.org/t/p/w185";
+    private static final String BACKDROP_URL = "http://image.tmdb.org/t/p/w780";
 
-    @BindView(R.id.tv_title) TextView textTitle ;
-    @BindView(R.id.tv_date) TextView textDate;
-    @BindView(R.id.iv_poster) ImageView imagePoster;
-    @BindView(R.id.tv_vote) TextView textVote ;
-    @BindView(R.id.tv_plot) TextView textPlot ;
+    @BindView(R.id.viewpager) ViewPager viewPager;
+    @BindView(R.id.sliding_tabs) TabLayout tabLayout;
+    @BindView(R.id.toolbar_layout) CollapsingToolbarLayout appBarLayout;
+    @BindView(R.id.iv_backdrop) ImageView imageBackdrop;
+    @BindView(R.id.fab) FloatingActionButton fab;
 
     public MovieFragment() {}
 
@@ -46,24 +49,31 @@ public class MovieFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_movie, container, false);
         ButterKnife.bind(this, rootView);
 
-        Bundle bundle = this.getArguments();
-        if (bundle != null) {
-            mMovie = bundle.getParcelable(MOVIE);
+        Bundle arguments = this.getArguments();
+        if (arguments != null) {
+            mMovie = arguments.getParcelable(MOVIE);
         }
 
-        textTitle.setText(mMovie.getmTitle());
-        textVote.setText(mMovie.getmVote());
-        textPlot.setText(mMovie.getmPlotSynopsis());
-        textDate.setText("(" + mMovie.getmDate().substring(0, 4) + ")");
-        Picasso.with(getContext())
-                .load(POSTER_URL.concat(mMovie.getmPoster()))
-                .into(imagePoster);
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(MOVIE, mMovie);
 
-        final FloatingActionButton fab = rootView.findViewById(R.id.fab);
+        FragmentPagerAdapter adapter = new FragmentPagerAdapter(getActivity(), getChildFragmentManager(), bundle);
+        viewPager.setAdapter(adapter);
+        tabLayout.setupWithViewPager(viewPager);
+
+        if (appBarLayout != null) {
+            appBarLayout.setTitle(mMovie.getmTitle());
+        }
+
+        Picasso.with(getContext())
+                .load(BACKDROP_URL.concat(mMovie.getmBackdrop()))
+                .placeholder(R.drawable.progress_animation)
+                .into(imageBackdrop);
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (fab.getDrawable().getConstantState().equals(getResources().getDrawable(R.drawable.ic_favorite_border).getConstantState())) {
+                if (Objects.requireNonNull(fab.getDrawable().getConstantState()).equals(getResources().getDrawable(R.drawable.ic_favorite_border).getConstantState())) {
                     insertFavorite();
                     fab.setImageResource(R.drawable.ic_favorite);
                 } else if (fab.getDrawable().getConstantState().equals(getResources().getDrawable(R.drawable.ic_favorite).getConstantState())) {
@@ -85,14 +95,14 @@ public class MovieFragment extends Fragment {
 
     private boolean isFavorite(String movieId) {
         Cursor savedFavorite;
-        savedFavorite = getActivity().getContentResolver().query(
+        savedFavorite = Objects.requireNonNull(getActivity()).getContentResolver().query(
                 FavoriteContract.FavoriteEntry.CONTENT_URI,
                 null,
                 FavoriteContract.FavoriteEntry.COLUMN_ID + "=" + movieId,
                 null,
                 null);
 
-        if (savedFavorite.moveToNext()) {
+        if (Objects.requireNonNull(savedFavorite).moveToNext()) {
             savedFavorite.close();
             return true;
         } else {
@@ -120,7 +130,7 @@ public class MovieFragment extends Fragment {
 
     private void deleteFavorite() {
         Uri uri = FavoriteContract.FavoriteEntry.CONTENT_URI.buildUpon().appendPath(mMovie.getmId()).build();
-        int favoriteDeleted = getActivity().getContentResolver().delete(uri, null, null);
+        int favoriteDeleted = Objects.requireNonNull(getActivity()).getContentResolver().delete(uri, null, null);
         if (favoriteDeleted != 0) {
             showMessage(R.string.removed);
         }
