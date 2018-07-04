@@ -7,19 +7,23 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.attilakasza.popularmovies.R;
+import com.attilakasza.popularmovies.adapters.FragmentPagerAdapter;
 import com.attilakasza.popularmovies.data.FavoriteContract;
 import com.attilakasza.popularmovies.models.Movie;
 import com.squareup.picasso.Picasso;
+
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,17 +32,14 @@ public class MovieActivity extends AppCompatActivity {
 
     private Movie mMovie;
     private static final String MOVIE = "MOVIE";
-    private static final String POSTER_URL = "http://image.tmdb.org/t/p/w185";
     private static final String BACKDROP_URL = "http://image.tmdb.org/t/p/w780";
 
-
-    @BindView(R.id.tv_date) TextView textDate;
-    @BindView(R.id.iv_poster) ImageView imagePoster;
     @BindView(R.id.iv_backdrop) ImageView imageBackdrop;
-    @BindView(R.id.tv_vote) TextView textVote ;
-    @BindView(R.id.tv_plot) TextView textPlot ;
     @BindView(R.id.detail_toolbar) Toolbar toolbar;
     @BindView(R.id.toolbar_layout) CollapsingToolbarLayout appBarLayout;
+    @BindView(R.id.viewpager) ViewPager viewPager;
+    @BindView(R.id.fab) FloatingActionButton fab;
+    @BindView(R.id.sliding_tabs) TabLayout tabLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,27 +57,28 @@ public class MovieActivity extends AppCompatActivity {
 
         mMovie = getIntent().getParcelableExtra(MOVIE);
 
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(MOVIE, mMovie);
+
+        FragmentPagerAdapter adapter = new FragmentPagerAdapter(this, getSupportFragmentManager(), bundle);
+        viewPager.setAdapter(adapter);
+        tabLayout.setupWithViewPager(viewPager);
+
         if (appBarLayout != null) {
             appBarLayout.setTitle(mMovie.getmTitle());
         }
-        textVote.setText(mMovie.getmVote());
-        textPlot.setText(mMovie.getmPlotSynopsis());
-        textDate.setText("(" + mMovie.getmDate().substring(0, 4) + ")");
-        Picasso.with(this)
-                .load(POSTER_URL.concat(mMovie.getmPoster()))
-                .into(imagePoster);
+
         Picasso.with(this)
                 .load(BACKDROP_URL.concat(mMovie.getmBackdrop()))
                 .into(imageBackdrop);
 
-        final FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (fab.getDrawable().getConstantState().equals(getResources().getDrawable(R.drawable.ic_favorite_border).getConstantState())) {
+                if (Objects.equals(fab.getDrawable().getConstantState(), getResources().getDrawable(R.drawable.ic_favorite_border).getConstantState())) {
                     insertFavorite();
                     fab.setImageResource(R.drawable.ic_favorite);
-                } else if (fab.getDrawable().getConstantState().equals(getResources().getDrawable(R.drawable.ic_favorite).getConstantState())) {
+                } else if (Objects.equals(fab.getDrawable().getConstantState(), getResources().getDrawable(R.drawable.ic_favorite).getConstantState())) {
                     deleteFavorite();
                     fab.setImageResource(R.drawable.ic_favorite_border);
                 }
@@ -110,7 +112,7 @@ public class MovieActivity extends AppCompatActivity {
                 null,
                 null);
 
-        if (savedFavorite.moveToNext()) {
+        if (Objects.requireNonNull(savedFavorite).moveToNext()) {
             savedFavorite.close();
             return true;
         } else {
