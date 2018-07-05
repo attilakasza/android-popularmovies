@@ -3,27 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/menu"
-        android:icon="@drawable/ic_menu"
-        android:title="@string/order_menu_item"
-        app:showAsAction="ifRoom">
-        <menu>
-            <item
-                android:id="@+id/popular"
-                android:orderInCategory="1"
-                android:title="@string/popular_menu_item"
-                app:showAsAction="ifRoom" />
-            <item
-                android:id="@+id/top_rated"
-                android:orderInCategory="2"
-                android:title="@string/top_rated_menu_item"
-                app:showAsAction="ifRoom" />
-            <item
-                android:id="@+id/favorite"
-                android:orderInCategory="3"
-                android:title="@string/favorite_menu_item"
-                app:showAsAction="ifRoom" />
-        </menu>
-    </item>
+        android:id="@+id/popular"
+        android:orderInCategory="1"
+        android:title="@string/popular_menu_item"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/top_rated"
+        android:orderInCategory="2"
+        android:title="@string/top_rated_menu_item"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/favorite"
+        android:orderInCategory="3"
+        android:title="@string/favorite_menu_item"
+        app:showAsAction="never" />
 
 </menu>
