@@ -5,4 +5,5 @@
     <color name="colorAccent">#880E4F</color>
 
     <color name="vote">#FE5454</color>
+    <color name="tabSelected">#484848</color>
 </resources>
