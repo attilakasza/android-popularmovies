@@ -6,4 +6,5 @@
 
     <color name="vote">#FE5454</color>
     <color name="tabSelected">#484848</color>
+    <color name="text">#b1b1b1</color>
 </resources>
