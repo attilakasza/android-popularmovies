@@ -22,7 +22,6 @@ public class OverviewFragment extends Fragment {
     private static final String POSTER_URL = "http://image.tmdb.org/t/p/w342";
 
     @BindView(R.id.iv_poster) ImageView mImageViewPoster;
-    @BindView(R.id.tv_title) TextView mTextViewTitle;
     @BindView(R.id.tv_date) TextView mTextViewDate;
     @BindView(R.id.tv_vote) TextView mTextViewVote;
     @BindView(R.id.tv_plot) TextView mTextViewPlot;
@@ -43,7 +42,7 @@ public class OverviewFragment extends Fragment {
             mMovie = bundle.getParcelable(MOVIE);
         }
 
-        mTextViewDate.setText("(" + mMovie.getmDate().substring(0, 4) + ")");
+        mTextViewDate.setText(mMovie.getmDate().substring(0, 4));
         Picasso.with(getContext())
                 .load(POSTER_URL.concat(mMovie.getmPoster()))
                 .into(mImageViewPoster);
