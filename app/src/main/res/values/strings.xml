@@ -19,4 +19,9 @@
     <string name="overview">Overview</string>
     <string name="trailer">Trailer</string>
     <string name="review">Review</string>
+
+    <string name="release">Release Date:</string>
+
+
+
 </resources>
