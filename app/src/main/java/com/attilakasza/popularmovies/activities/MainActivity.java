@@ -3,7 +3,6 @@ package com.attilakasza.popularmovies.activities;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -67,6 +66,8 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.OnIt
 
         mAdapter = new FavoriteAdapter(MainActivity.this, MainActivity.this);
 
+        mMovieType = "popular";
+
         if (checkConnection()) {
             if (savedInstanceState != null && savedInstanceState.containsKey(MOVIE_QUERY)) {
                 mMovieType = savedInstanceState.getString(MOVIE_QUERY);
@@ -77,7 +78,6 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.OnIt
                     new MovieQueryTask().execute(mMovieType);
                 }
             } else {
-                mMovieType = "popular";
                 new MovieQueryTask().execute(mMovieType);
             }
         }
