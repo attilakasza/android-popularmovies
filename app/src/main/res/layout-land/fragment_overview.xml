@@ -20,6 +20,7 @@
             android:layout_centerInParent="true"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="48dp"
+            android:contentDescription="@string/movie_poster_content_description"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="H,3:4"
             app:layout_constraintEnd_toEndOf="parent"
