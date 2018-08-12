@@ -3,4 +3,79 @@
     <dimen name="app_bar_height">300dp</dimen>
     <dimen name="app_bar_tablet_height">350dp</dimen>
 
+    <!-- fragment_overview_sw600dp_land -->
+    <dimen name="fosl_constraint_layout_margin_top">16dp</dimen>
+    <dimen name="fosl_image_view_width">276dp</dimen>
+    <dimen name="fosl_image_view_height">380dp</dimen>
+    <dimen name="fosl_image_view_margin_bottom">8dp</dimen>
+    <dimen name="fosl_image_view_margin_end">48dp</dimen>
+    <dimen name="fosl_linear_layout_width">365dp</dimen>
+    <dimen name="fosl_linear_layout_margin_end">8dp</dimen>
+    <dimen name="fosl_linear_layout_margin_start">8dp</dimen>
+    <dimen name="fosl_text_view_size">14sp</dimen>
+    <dimen name="fosl_text_view_margin_start">4dp</dimen>
+    <dimen name="fosl_text_view_vote_margin_bottom">8dp</dimen>
+    <dimen name="fosl_text_view_vote_margin_start">228dp</dimen>
+    <dimen name="fosl_text_view_vote_margin_top">16dp</dimen>
+    <dimen name="fosl_text_view_vote_padding_top">26dp</dimen>
+    <dimen name="fosl_text_view_vote_size">24sp</dimen>
+    <dimen name="fosl_view_width">585dp</dimen>
+    <dimen name="fosl_view_height">0dp</dimen>
+    <dimen name="fosl_view_margin_top">40dp</dimen>
+
+    <!-- fragment_overview_sw600dp_port -->
+    <dimen name="fosp_image_view_width">332dp</dimen>
+    <dimen name="fosp_image_view_height">532dp</dimen>
+    <dimen name="fosp_image_view_margin_bottom">8dp</dimen>
+    <dimen name="fosp_image_view_margin_end">48dp</dimen>
+    <dimen name="fosp_image_view_margin_start">8dp</dimen>
+    <dimen name="fosp_linear_layout_width">365dp</dimen>
+    <dimen name="fosp_linear_layout_margin_end">8dp</dimen>
+    <dimen name="fosp_linear_layout_margin_start">8dp</dimen>
+    <dimen name="fosp_linear_layout_margin_top">12dp</dimen>
+    <dimen name="fosp_text_view_size">14sp</dimen>
+    <dimen name="fosp_text_view_margin_start">4dp</dimen>
+    <dimen name="fosp_text_view_vote_margin_bottom">8dp</dimen>
+    <dimen name="fosp_text_view_vote_margin_start">296dp</dimen>
+    <dimen name="fosp_text_view_vote_margin_top">8dp</dimen>
+    <dimen name="fosp_text_view_vote_padding_top">26dp</dimen>
+    <dimen name="fosp_text_view_vote_size">24sp</dimen>
+    <dimen name="fosp_view_width">585dp</dimen>
+    <dimen name="fosp_view_height">0dp</dimen>
+    <dimen name="fosp_view_margin_top">40dp</dimen>
+
+    <!-- fragment_poster_w900dp -->
+    <dimen name="fpw_recycler_view_width">330dp</dimen>
+    <dimen name="fpw_frame_layout_width">0dp</dimen>
+
+    <!-- fragment_review_sw600dp -->
+    <dimen name="frs_recycler_view_margin_top">8dp</dimen>
+    <dimen name="frs_recycler_view_margin_start">48dp</dimen>
+    <dimen name="frs_recycler_view_margin_end">48dp</dimen>
+
+    <!-- fragment_trailer_sw600dp -->
+    <dimen name="fts_recycler_view_margin_top">8dp</dimen>
+    <dimen name="fts_recycler_view_margin_start">48dp</dimen>
+    <dimen name="fts_recycler_view_margin_end">48dp</dimen>
+
+    <!-- poster_list_item -->
+    <dimen name="pli_image_view_size">0dp</dimen>
+
+    <!-- review_list_item -->
+    <dimen name="rli_card_view_margin_bottom">8dp</dimen>
+    <dimen name="rli_card_view_margin_end">16dp</dimen>
+    <dimen name="rli_card_view_margin_start">16dp</dimen>
+    <dimen name="rli_card_view_margin_top">8dp</dimen>
+    <dimen name="rli_text_view_margin_top">12dp</dimen>
+    <dimen name="rli_text_view_margin_start">12dp</dimen>
+    <dimen name="rli_text_view_margin_end">12dp</dimen>
+    <dimen name="rli_text_view_margin">12dp</dimen>
+
+    <!-- trailer_list_item -->
+    <dimen name="tli_card_view_margin_bottom">8dp</dimen>
+    <dimen name="tli_card_view_margin_end">16dp</dimen>
+    <dimen name="tli_card_view_margin_start">16dp</dimen>
+    <dimen name="tli_card_view_margin_top">8dp</dimen>
+    <dimen name="tli_text_view_margin">8dp</dimen>
+
 </resources>

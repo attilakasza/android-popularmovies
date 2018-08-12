@@ -12,13 +12,13 @@
     <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/rv_poster"
-        android:layout_width="330dp"
+        android:layout_width="@dimen/fpw_recycler_view_width"
         android:layout_height="match_parent"
         tools:listitem="@layout/poster_list_item" />
 
     <FrameLayout
         android:id="@+id/movie_container"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/fpw_frame_layout_width"
         android:layout_height="match_parent"
         android:layout_weight="3" />
 

@@ -2,10 +2,10 @@
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="8dp"
-    android:layout_marginEnd="16dp"
-    android:layout_marginStart="16dp"
-    android:layout_marginTop="8dp"
+    android:layout_marginBottom="@dimen/tli_card_view_margin_bottom"
+    android:layout_marginEnd="@dimen/tli_card_view_margin_end"
+    android:layout_marginStart="@dimen/tli_card_view_margin_start"
+    android:layout_marginTop="@dimen/tli_card_view_margin_top"
     android:backgroundTint="@color/tabSelected">
 
     <LinearLayout
@@ -25,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_margin="8dp"
+            android:layout_margin="@dimen/tli_text_view_margin"
             android:textColor="@android:color/white" />
 
     </LinearLayout>

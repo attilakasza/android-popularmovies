@@ -11,15 +11,15 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="16dp">
+        android:layout_marginTop="@dimen/fosl_constraint_layout_margin_top">
 
         <ImageView
             android:id="@+id/iv_poster"
-            android:layout_width="276dp"
-            android:layout_height="380dp"
+            android:layout_width="@dimen/fosl_image_view_width"
+            android:layout_height="@dimen/fosl_image_view_height"
             android:layout_centerInParent="true"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="48dp"
+            android:layout_marginBottom="@dimen/fosl_image_view_margin_bottom"
+            android:layout_marginEnd="@dimen/fosl_image_view_margin_end"
             android:contentDescription="@string/movie_poster_content_description"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="H,3:4"
@@ -32,10 +32,10 @@
 
         <LinearLayout
             android:id="@+id/linearLayout"
-            android:layout_width="365dp"
+            android:layout_width="@dimen/fosl_linear_layout_width"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
+            android:layout_marginEnd="@dimen/fosl_linear_layout_margin_end"
+            android:layout_marginStart="@dimen/fosl_linear_layout_margin_start"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -52,15 +52,15 @@
                     android:layout_height="wrap_content"
                     android:text="@string/release"
                     android:textColor="@color/text"
-                    android:textSize="14sp" />
+                    android:textSize="@dimen/fosl_text_view_size" />
 
                 <TextView
                     android:id="@+id/tv_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
+                    android:layout_marginStart="@dimen/fosl_text_view_margin_start"
                     android:textColor="@android:color/white"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/fosl_text_view_size"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -69,7 +69,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/text"
-                android:textSize="14sp" />
+                android:textSize="@dimen/fosl_text_view_size" />
         </LinearLayout>
 
         <TextView
@@ -78,14 +78,14 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/iv_poster"
             android:layout_alignParentEnd="true"
-            android:layout_marginBottom="8dp"
-            android:layout_marginStart="228dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginBottom="@dimen/fosl_text_view_vote_margin_bottom"
+            android:layout_marginStart="@dimen/fosl_text_view_vote_margin_start"
+            android:layout_marginTop="@dimen/fosl_text_view_vote_margin_top"
             android:background="@drawable/ic_vote"
             android:gravity="center"
-            android:paddingTop="26dp"
+            android:paddingTop="@dimen/fosl_text_view_vote_padding_top"
             android:textColor="@color/vote"
-            android:textSize="24sp"
+            android:textSize="@dimen/fosl_text_view_vote_size"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/iv_poster"
@@ -94,9 +94,9 @@
 
         <View
             android:id="@+id/view"
-            android:layout_width="585dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="40dp"
+            android:layout_width="@dimen/fosl_view_width"
+            android:layout_height="@dimen/fosl_view_height"
+            android:layout_marginTop="@dimen/fosl_view_margin_top"
             app:layout_constraintTop_toBottomOf="@+id/iv_poster" />
     </android.support.constraint.ConstraintLayout>
 
