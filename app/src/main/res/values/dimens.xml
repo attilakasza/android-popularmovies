@@ -1,7 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="app_bar_height">300dp</dimen>
-    <dimen name="app_bar_tablet_height">350dp</dimen>
+
+    <!-- activity_movie -->
+    <dimen name="am_app_bar_layout_height">300dp</dimen>
+    <dimen name="am_floating_action_button_margin">16dp</dimen>
+    <dimen name="am_tab_layout_padding_end">24dp</dimen>
+    <dimen name="am_tab_layout_padding_start">24dp</dimen>
+    <dimen name="am_view_pager_margin_top">8dp</dimen>
+
+    <!-- activity_movie_land -->
+    <dimen name="aml_app_bar_layout_height">300dp</dimen>
+    <dimen name="aml_floating_action_button_margin">16dp</dimen>
+    <dimen name="aml_tab_layout_padding_end">48dp</dimen>
+    <dimen name="aml_tab_layout_padding_start">48dp</dimen>
+    <dimen name="aml_view_pager_margin_top">8dp</dimen>
+
+    <!-- activity_movie_sw600dp_land -->
+    <dimen name="amsl_app_bar_layout_height">350dp</dimen>
+    <dimen name="amsl_floating_action_button_margin">16dp</dimen>
+    <dimen name="amsl_tab_layout_padding_end">100dp</dimen>
+    <dimen name="amsl_tab_layout_padding_start">100dp</dimen>
+    <dimen name="amsl_view_pager_margin_top">8dp</dimen>
+
+    <!-- activity_movie_sw600dp_port -->
+    <dimen name="amsp_app_bar_layout_height">300dp</dimen>
+    <dimen name="amsp_floating_action_button_margin">16dp</dimen>
+    <dimen name="amsp_tab_layout_padding_end">70dp</dimen>
+    <dimen name="amsp_tab_layout_padding_start">70dp</dimen>
+
+    <!-- fragment_movie -->
+    <dimen name="fm_app_bar_layout_height">300dp</dimen>
+    <dimen name="fm_floating_action_button_margin">16dp</dimen>
+    <dimen name="fm_tab_layout_padding_end">40dp</dimen>
+    <dimen name="fm_tab_layout_padding_start">40dp</dimen>
+
+    <!-- fragment_overview -->
+    <dimen name="fo_image_view_width">0dp</dimen>
+    <dimen name="fo_image_view_height">0dp</dimen>
+    <dimen name="fo_image_view_margin_bottom">16dp</dimen>
+    <dimen name="fo_image_view_margin_end">48dp</dimen>
+    <dimen name="fo_image_view_margin_start">48dp</dimen>
+    <dimen name="fo_image_view_margin_top">8dp</dimen>
+    <dimen name="fo_text_view_vote_margin_end">8dp</dimen>
+    <dimen name="fo_text_view_vote_margin_start">8dp</dimen>
+    <dimen name="fo_text_view_vote_margin_top">295dp</dimen>
+    <dimen name="fo_text_view_vote_padding_top">26dp</dimen>
+    <dimen name="fo_text_view_vote_size">24sp</dimen>
+    <dimen name="fo_linear_layout_margin_top">16dp</dimen>
+    <dimen name="fo_linear_layout_absoluteX">0dp</dimen>
+    <dimen name="fo_text_view_margin_start">16dp</dimen>
+    <dimen name="fo_text_view_size">14sp</dimen>
+    <dimen name="fo_text_view_date_margin_start">4dp</dimen>
+    <dimen name="fo_text_view_plot_margin_bottom">8dp</dimen>
+    <dimen name="fo_text_view_plot_margin_end">16dp</dimen>
+    <dimen name="fo_text_view_plot_margin_start">16dp</dimen>
+
+    <!-- fragment_overview_land -->
+    <dimen name="fol_constraint_layout_margin_top">8dp</dimen>
+    <dimen name="fol_image_view_width">248dp</dimen>
+    <dimen name="fol_image_view_height">303dp</dimen>
+    <dimen name="fol_image_view_margin_bottom">8dp</dimen>
+    <dimen name="fol_image_view_margin_end">48dp</dimen>
+    <dimen name="fol_linear_layout_width">365dp</dimen>
+    <dimen name="fol_linear_layout_margin_end">8dp</dimen>
+    <dimen name="fol_linear_layout_margin_start">8dp</dimen>
+    <dimen name="fol_text_view_size">14sp</dimen>
+    <dimen name="fol_text_view_margin_start">4dp</dimen>
+    <dimen name="fol_text_view_vote_margin_bottom">8dp</dimen>
+    <dimen name="fol_text_view_vote_margin_start">188dp</dimen>
+    <dimen name="fol_text_view_vote_margin_top">22dp</dimen>
+    <dimen name="fol_text_view_vote_padding_top">26dp</dimen>
+    <dimen name="fol_text_view_vote_size">24sp</dimen>
+    <dimen name="fol_view_width">585dp</dimen>
+    <dimen name="fol_view_height">0dp</dimen>
+    <dimen name="fol_view_margin_top">40dp</dimen>
 
     <!-- fragment_overview_sw600dp_land -->
     <dimen name="fosl_constraint_layout_margin_top">16dp</dimen>

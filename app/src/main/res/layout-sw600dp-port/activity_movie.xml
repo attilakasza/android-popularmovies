@@ -12,7 +12,7 @@
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/app_bar_height"
+        android:layout_height="@dimen/amsp_app_bar_layout_height"
         android:fitsSystemWindows="true"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
@@ -61,7 +61,7 @@
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/amsp_floating_action_button_margin"
         app:layout_anchor="@id/app_bar"
         app:layout_anchorGravity="bottom|right|end"
         app:srcCompat="@drawable/ic_favorite_border" />
@@ -78,8 +78,8 @@
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
             app:tabMode="fixed"
-            app:tabPaddingEnd="70dp"
-            app:tabPaddingStart="70dp"
+            app:tabPaddingEnd="@dimen/amsp_tab_layout_padding_end"
+            app:tabPaddingStart="@dimen/amsp_tab_layout_padding_start"
             app:tabSelectedTextColor="@color/tabSelected"
             app:tabTextColor="@android:color/white" />
 

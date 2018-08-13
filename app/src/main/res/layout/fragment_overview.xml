@@ -18,13 +18,13 @@
 
             <ImageView
                 android:id="@+id/iv_poster"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_width="@dimen/fo_image_view_width"
+                android:layout_height="@dimen/fo_image_view_height"
                 android:layout_centerInParent="true"
-                android:layout_marginBottom="16dp"
-                android:layout_marginEnd="48dp"
-                android:layout_marginStart="48dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginBottom="@dimen/fo_image_view_margin_bottom"
+                android:layout_marginEnd="@dimen/fo_image_view_margin_end"
+                android:layout_marginStart="@dimen/fo_image_view_margin_start"
+                android:layout_marginTop="@dimen/fo_image_view_margin_top"
                 android:contentDescription="@string/movie_poster_content_description"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintDimensionRatio="H,3:4"
@@ -41,14 +41,14 @@
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/iv_poster"
                 android:layout_alignParentEnd="true"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="295dp"
+                android:layout_marginEnd="@dimen/fo_text_view_vote_margin_end"
+                android:layout_marginStart="@dimen/fo_text_view_vote_margin_start"
+                android:layout_marginTop="@dimen/fo_text_view_vote_margin_top"
                 android:background="@drawable/ic_vote"
                 android:gravity="center"
-                android:paddingTop="26dp"
+                android:paddingTop="@dimen/fo_text_view_vote_padding_top"
                 android:textColor="@color/vote"
-                android:textSize="24sp"
+                android:textSize="@dimen/fo_text_view_vote_size"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/linearLayout"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -62,27 +62,27 @@
                 android:id="@+id/linearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="@dimen/fo_linear_layout_margin_top"
                 android:orientation="horizontal"
                 app:layout_constraintTop_toBottomOf="@+id/iv_poster"
                 tools:ignore="MissingConstraints"
-                tools:layout_editor_absoluteX="0dp">
+                tools:layout_editor_absoluteX="@dimen/fo_linear_layout_absoluteX">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
+                    android:layout_marginStart="@dimen/fo_text_view_margin_start"
                     android:text="@string/release"
                     android:textColor="@color/text"
-                    android:textSize="14sp" />
+                    android:textSize="@dimen/fo_text_view_size" />
 
                 <TextView
                     android:id="@+id/tv_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
+                    android:layout_marginStart="@dimen/fo_text_view_date_margin_start"
                     android:textColor="@android:color/white"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/fo_text_view_size"
                     android:textStyle="bold" />
             </LinearLayout>
         </android.support.constraint.ConstraintLayout>
@@ -91,11 +91,11 @@
             android:id="@+id/tv_plot"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
+            android:layout_marginBottom="@dimen/fo_text_view_plot_margin_bottom"
+            android:layout_marginEnd="@dimen/fo_text_view_plot_margin_end"
+            android:layout_marginStart="@dimen/fo_text_view_plot_margin_start"
             android:textColor="@color/text"
-            android:textSize="14sp" />
+            android:textSize="@dimen/fo_text_view_size" />
     </LinearLayout>
 
 </android.support.v4.widget.NestedScrollView>

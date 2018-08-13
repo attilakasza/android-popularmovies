@@ -12,7 +12,7 @@
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/app_bar_tablet_height"
+        android:layout_height="@dimen/amsl_app_bar_layout_height"
         android:fitsSystemWindows="true"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
@@ -61,7 +61,7 @@
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/amsl_floating_action_button_margin"
         app:layout_anchor="@id/app_bar"
         app:layout_anchorGravity="bottom|right|end"
         app:srcCompat="@drawable/ic_favorite_border" />
@@ -78,8 +78,8 @@
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
             app:tabMode="fixed"
-            app:tabPaddingEnd="100dp"
-            app:tabPaddingStart="100dp"
+            app:tabPaddingEnd="@dimen/amsl_tab_layout_padding_end"
+            app:tabPaddingStart="@dimen/amsl_tab_layout_padding_start"
             app:tabSelectedTextColor="@color/tabSelected"
             app:tabTextColor="@android:color/white" />
 
@@ -87,7 +87,7 @@
             android:id="@+id/viewpager"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/amsl_view_pager_margin_top"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
     </LinearLayout>
 
